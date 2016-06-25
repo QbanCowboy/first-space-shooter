@@ -39,6 +39,8 @@ public class Enemy : MonoBehaviour {
 			FireLaser ();
 			timeToFire = 0;
 		}
+		transform.position += Vector3.down * speed * Time.deltaTime;
+			
 
 	}
 

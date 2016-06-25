@@ -36,7 +36,7 @@ public class EnemySpawner : MonoBehaviour {
 
 	void OnEnable(){
 		typeOneEnemyTimer = 0f;
-		Invoke ("SpawnAsteroid", asteroidSpawnDelay);
+		Invoke ("SpawnEnemy", asteroidSpawnDelay);
 	}
 
 	void OnDisable(){
@@ -77,7 +77,7 @@ public class EnemySpawner : MonoBehaviour {
 		GameObject newEnemy = Instantiate (enemyPrefab, enemyLoc, Quaternion.identity) as GameObject;
 	
 		//if time elapsed is over 15 seconds, increase the Type 1 enemy rate of fire;
-		ScheduleNextAsteroid ();
+		ScheduleNextEnemy ();
 	}
 
 	void SpawnAsteroid(){
@@ -100,7 +100,21 @@ public class EnemySpawner : MonoBehaviour {
 		} else {
 			spawnInSeconds = minSpawnRate;
 		}
-		Invoke ("SpawnAsteroid", spawnInSeconds);
+		Invoke ("SpawnEnemy", spawnInSeconds);
+	}
+
+
+	void ScheduleNextEnemy(){
+		float spawnInSeconds;
+		if (typeOneEnemyTimer > 25f) {
+			asteroidSpawnDelay -= .5f;
+		}
+		if (asteroidSpawnDelay > minSpawnRate) {
+			spawnInSeconds = Random.Range (minSpawnRate, asteroidSpawnDelay);
+		} else {
+			spawnInSeconds = minSpawnRate;
+		}
+		Invoke ("SpawnEnemy", spawnInSeconds);
 	}
 
 
