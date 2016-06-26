@@ -83,6 +83,16 @@ public class EnemySpawner : MonoBehaviour {
 	
 	}
 
+	void SpawnEnemy2(){
+		Vector2 max = Camera.main.ViewportToWorldPoint (new Vector2 (1, 1));
+		Vector2 min = Camera.main.ViewportToWorldPoint (new Vector2 (0, 0));
+		float xVal = Random.Range (min.x, max.x);
+		xVal = Mathf.Clamp (xVal, (min.x + .6f), (max.x - .6f));
+		Vector2 enemyLoc = new Vector2 (xVal, transform.position.y);
+		GameObject newEnemy = Instantiate (enemyPrefab, enemyLoc, Quaternion.identity) as GameObject;
+
+	}
+
 	void SpawnAsteroid(){
 		Vector2 max = Camera.main.ViewportToWorldPoint (new Vector2 (1, 1));
 		Vector2 min = Camera.main.ViewportToWorldPoint (new Vector2 (0, 0));
