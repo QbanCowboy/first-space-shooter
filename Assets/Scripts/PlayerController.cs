@@ -16,8 +16,6 @@ public class PlayerController : MonoBehaviour {
 	public GameObject shield;
 	private AudioSource laserSound;
 	public GameObject enemySpawner;
-	private bool beginningOfGame = true;
-
 	//attributes that control the double blasters Power Up on the ship
 	private bool doubleBlasters = false;
 	private float doubleBlasters_timer = 0;
@@ -38,7 +36,6 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	void Start(){
-		ResetShip ();
 		float distance = transform.position.z - Camera.main.transform.position.z;
 		Vector3 leftMost = Camera.main.ViewportToWorldPoint (new Vector3 (0, 0, distance));
 		Vector3 rightMost = Camera.main.ViewportToWorldPoint (new Vector3 (1, 1, distance));
@@ -56,15 +53,7 @@ public class PlayerController : MonoBehaviour {
 
 	void OnEnable(){
 		ResetShip ();
-		if (!beginningOfGame) {
-			enemySpawner.SetActive (true);
-		} else {
-			beginningOfGame = false;
-		}
-//		shield.GetComponent<shields> ().TurnOff ();
-//		health = maxHealth;
-//		updateHealth (health);
-//		enemySpawner.GetComponent<EnemySpawner> ().TurnOnEnemies ();
+		enemySpawner.SetActive (true);
 	} 
 
 	void Fire(){
